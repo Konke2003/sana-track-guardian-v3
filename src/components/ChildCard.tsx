@@ -1,5 +1,6 @@
-import React from 'react';
-import { MapPin, Battery, Wifi, WifiOff, Clock, User } from 'lucide-react';
+import React, { useState } from 'react';
+import { MapPin, Battery, Wifi, WifiOff, Clock, User, Map } from 'lucide-react';
+import TrackingMap from './TrackingMap';
 
 interface Child {
   id: number;
@@ -21,6 +22,7 @@ interface ChildCardProps {
 }
 
 const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
+  const [showMap, setShowMap] = useState(false);
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'safe': return 'text-status-safe';
@@ -112,14 +114,25 @@ const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
       </div>
 
       {/* Actions */}
-      <div className="flex space-x-2">
-        <button className="btn-primary flex-1">
-          Track Location
+      <div className="flex space-x-2 mb-4">
+        <button 
+          onClick={() => setShowMap(!showMap)}
+          className="btn-primary flex-1 flex items-center justify-center space-x-2"
+        >
+          <Map className="w-4 h-4" />
+          <span>{showMap ? 'Hide Map' : 'Show Map'}</span>
         </button>
         <button className="btn-secondary flex-1">
           Settings
         </button>
       </div>
+
+      {/* Inline Map */}
+      {showMap && (
+        <div className="mb-4">
+          <TrackingMap children={[child]} focusChild={child} height="h-64" />
+        </div>
+      )}
 
       {/* Emergency Alert for Warning Status */}
       {child.status === 'warning' && (

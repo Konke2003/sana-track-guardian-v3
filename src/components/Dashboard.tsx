@@ -1,5 +1,6 @@
 import React from 'react';
 import { MapPin, Users, Shield, Battery, Wifi, WifiOff, AlertTriangle } from 'lucide-react';
+import TrackingMap from './TrackingMap';
 
 interface Child {
   id: number;
@@ -152,6 +153,11 @@ const Dashboard: React.FC<DashboardProps> = ({ children }) => {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Interactive Map */}
+      <div className="mb-8">
+        <TrackingMap children={children} height="h-[500px]" />
       </div>
 
       {/* Quick Actions */}
