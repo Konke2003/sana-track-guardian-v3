@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { MapPin, Battery, Wifi, WifiOff, Clock, User, Map } from 'lucide-react';
+import { MapPin, Battery, Wifi, WifiOff, Clock, User, Map, Settings } from 'lucide-react';
 import TrackingMap from './TrackingMap';
+import ChildDetailsDialog from './ChildDetailsDialog';
 
 interface Child {
   id: number;
@@ -122,9 +123,15 @@ const ChildCard: React.FC<ChildCardProps> = ({ child }) => {
           <Map className="w-4 h-4" />
           <span>{showMap ? 'Hide Map' : 'Show Map'}</span>
         </button>
-        <button className="btn-secondary flex-1">
-          Settings
-        </button>
+        <ChildDetailsDialog 
+          child={child}
+          trigger={
+            <button className="btn-secondary flex-1 flex items-center justify-center space-x-2">
+              <Settings className="w-4 h-4" />
+              <span>View Details</span>
+            </button>
+          }
+        />
       </div>
 
       {/* Inline Map */}

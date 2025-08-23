@@ -32,7 +32,7 @@ const TrackingMap: React.FC<TrackingMapProps> = ({
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markers = useRef<mapboxgl.Marker[]>([]);
-  const [mapboxToken, setMapboxToken] = useState<string>('');
+  const [mapboxToken, setMapboxToken] = useState<string>('pk.eyJ1Ijoia29ua2VjZWxlIiwiYSI6ImNtZW11bXoxODBhajAya3NhZnh3aXZvYzMifQ.9caENhjK67yvK3Em8GiX0w');
   const [showTokenInput, setShowTokenInput] = useState<boolean>(false);
   const [isMapLoaded, setIsMapLoaded] = useState<boolean>(false);
 
@@ -52,7 +52,7 @@ const TrackingMap: React.FC<TrackingMapProps> = ({
       map.current = new mapboxgl.Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/light-v11',
-        center: focusChild ? [focusChild.location.lng, focusChild.location.lat] : [18.4241, -33.9249], // Default to Cape Town
+        center: focusChild ? [focusChild.location.lng, focusChild.location.lat] : [18.4241, -33.9249], // Default to Cape Town CBD
         zoom: focusChild ? 14 : 10,
         pitch: 0,
       });

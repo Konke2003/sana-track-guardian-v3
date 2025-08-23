@@ -4,6 +4,7 @@ import TrackingMap from './TrackingMap';
 import AddChildDialog from './AddChildDialog';
 import EmergencyAlertDialog from './EmergencyAlertDialog';
 import ExportDataDialog from './ExportDataDialog';
+import ChildDetailsDialog from './ChildDetailsDialog';
 
 interface Child {
   id: number;
@@ -151,9 +152,14 @@ const Dashboard: React.FC<DashboardProps> = ({ children, onAddChild }) => {
             </div>
 
             <div className="mt-4">
-              <button className="btn-secondary w-full">
-                View Details
-              </button>
+              <ChildDetailsDialog 
+                child={child}
+                trigger={
+                  <button className="btn-secondary w-full">
+                    View Details
+                  </button>
+                }
+              />
             </div>
           </div>
         ))}
