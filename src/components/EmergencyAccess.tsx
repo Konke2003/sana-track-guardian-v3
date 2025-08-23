@@ -171,15 +171,33 @@ const EmergencyAccess: React.FC = () => {
         </div>
         <div className="sana-card-content">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <button className="btn-secondary flex items-center space-x-2">
+            <button 
+              className="btn-secondary flex items-center space-x-2"
+              onClick={() => {
+                // Simulate tracking all children
+                alert(`🗺️ Tracking All Children\n\nEmma: Long Street, Cape Town CBD ✅\nLiam: V&A Waterfront, Cape Town ✅\nSophia: Green Point, Cape Town ⚠️\n\nAll locations updated successfully!`);
+              }}
+            >
               <MapPin className="w-4 h-4" />
               <span>Track All Children</span>
             </button>
-            <button className="btn-secondary flex items-center space-x-2">
+            <button 
+              className="btn-secondary flex items-center space-x-2"
+              onClick={() => {
+                // Simulate calling all children
+                alert(`📞 Calling All Children\n\nEmma: Calling... ✅ Connected\nLiam: Calling... ✅ Connected\nSophia: Calling... ⚠️ No response (device offline)\n\n2/3 children reached successfully.`);
+              }}
+            >
               <Phone className="w-4 h-4" />
               <span>Call All Children</span>
             </button>
-            <button className="btn-secondary flex items-center space-x-2">
+            <button 
+              className="btn-secondary flex items-center space-x-2"
+              onClick={() => {
+                // Simulate sending safe message
+                alert(`💬 Safe Message Sent\n\n"Hi! This is mom/dad checking in. Please respond when you see this message."\n\nMessage sent to all 3 children via their GPS tracking devices.`);
+              }}
+            >
               <MessageSquare className="w-4 h-4" />
               <span>Send Safe Message</span>
             </button>

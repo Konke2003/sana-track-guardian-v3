@@ -106,36 +106,36 @@ export default function Index() {
   const [currentPage, setCurrentPage] = useState('dashboard');
   const { account, connectWallet } = useWallet();
 
-  // Mock data for children
+  // Mock data for children - Fixed land coordinates
   const [children, setChildren] = useState([
     {
       id: 1,
       name: "Emma Johnson",
       age: 8,
-      location: { lat: -33.9249, lng: 18.4241, address: "Cape Town CBD, South Africa" },
+      location: { lat: -33.9289, lng: 18.4194, address: "Long Street, Cape Town CBD" },
       status: "safe" as const,
       lastSeen: "2 minutes ago",
-      battery: 85,
+      battery: 85, // GPS tracking device battery
       isOnline: true
     },
     {
       id: 2,
       name: "Liam Smith",
       age: 10,
-      location: { lat: -33.9331, lng: 18.4102, address: "Sea Point, Cape Town" },
+      location: { lat: -33.9249, lng: 18.4241, address: "V&A Waterfront, Cape Town" },
       status: "safe" as const,
       lastSeen: "5 minutes ago",
-      battery: 42,
+      battery: 42, // GPS tracking device battery
       isOnline: true
     },
     {
       id: 3,
       name: "Sophia Brown",
       age: 7,
-      location: { lat: -33.9150, lng: 18.3743, address: "Camps Bay, Cape Town" },
+      location: { lat: -33.9150, lng: 18.4230, address: "Green Point, Cape Town" },
       status: "warning" as const,
       lastSeen: "15 minutes ago",
-      battery: 20,
+      battery: 20, // GPS tracking device battery (low warning)
       isOnline: false
     }
   ]);
