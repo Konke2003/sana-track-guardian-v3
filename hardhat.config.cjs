@@ -17,21 +17,11 @@ module.exports = {
     
     // BlockDAG Testnet
     blockdag_testnet: {
-      url: "https://primordial.bdagscan.com", 
+      url: "https://rpc.primordial.bdagscan.com/", 
       accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
       chainId: 1043, // Replace with actual BlockDAG testnet chain ID
-      gas: 2100000,
-      gasPrice: 8000000000
     },
     
-    // BlockDAG Mainnet (for production)
-    blockdag_mainnet: {
-      url: "https://mainnet-rpc.blockdag.network",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-      chainId: 1234, // Replace with actual BlockDAG mainnet chain ID
-      gas: 2100000,
-      gasPrice: 8000000000
-    }
   },
   etherscan: {
     // Add BlockDAG explorer API key when available

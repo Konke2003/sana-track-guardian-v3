@@ -1,44 +1,44 @@
 // scripts/deploy.js
-import pkg from "ethers";
-const { ethers } = pkg;
+import hre from "hardhat"; // Hardhat runtime environment
 
 async function main() {
-    console.log("🚀 Starting SanaTrack deployment to Ethereum Sepolia testnet...\n");
+    console.log("🚀 Starting SanaTrack deployment...\n");
 
     // Get network info
-    const network = await ethers.provider.getNetwork();
+    const network = await hre.ethers.provider.getNetwork();
     console.log("Network:", network.name, "Chain ID:", network.chainId.toString());
 
-    // Get the deployer account
-    const [deployer] = await ethers.getSigners();
+    // Get deployer account
+    const [deployer] = await hre.ethers.getSigners();
     console.log("Deploying contracts with account:", deployer.address);
 
     // Check deployer balance
-    const balance = await ethers.provider.getBalance(deployer.address);
-    console.log("Account balance:", ethers.formatEther(balance), "ETH");
+    const balance = await hre.ethers.provider.getBalance(deployer.address);
+    console.log("Account balance:", hre.ethers.formatEther(balance), "ETH");
     
-    // Check if we have enough ETH for deployment
-    const minimumBalance = ethers.parseEther("0.01"); // 0.01 ETH minimum
+    // Minimum balance check
+    const minimumBalance = hre.ethers.parseEther("0.01");
     if (balance < minimumBalance) {
         console.log("\n❌ Insufficient balance for deployment!");
-        console.log("💡 Get free testnet ETH from: https://sepoliafaucet.com");
-        console.log("💡 Or try: https://faucet.sepolia.dev");
+        console.log("💡 Get free testnet ETH from your faucet.");
         return;
     }
 
     console.log("\n📋 Deploying SanaTrack contract...");
-    
-    // Deploy the SanaTrack contract
-    const SanaTrack = await ethers.getContractFactory("SanaTrack");
+
+    // Deploy contract
+    const SanaTrack = await hre.ethers.getContractFactory("SanaTrack");
     const sanaTrack = await SanaTrack.deploy();
     
     console.log("⏳ Waiting for deployment...");
     await sanaTrack.waitForDeployment();
-    const contractAddress = await sanaTrack.getAddress();
 
+    const contractAddress = await sanaTrack.getAddress();
     console.log("\n✅ SanaTrack deployed successfully!");
     console.log("📍 Contract Address:", contractAddress);
-    console.log("🔗 Sepolia Etherscan:", `https://sepolia.etherscan.io/address/${contractAddress}`);
+
+    // Explorer link (replace if using BlockDAG testnet)
+    console.log("🔗 BlockDAG Explorer (Testnet):", `https://testnet.bdagscan.com/address/${contractAddress}`);
     
     console.log("\n" + "=".repeat(60));
     console.log("🎉 DEPLOYMENT COMPLETED SUCCESSFULLY!");
@@ -49,7 +49,7 @@ async function main() {
 
 // Handle deployment
 main()
-    .then((result) => {
+    .then(() => {
         console.log("\n🎯 Ready to integrate with your frontend!");
         process.exit(0);
     })
