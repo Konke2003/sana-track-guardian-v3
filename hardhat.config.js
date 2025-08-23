@@ -1,38 +1,42 @@
-import "@nomicfoundation/hardhat-toolbox";
-import { config } from 'dotenv';
+require("@nomicfoundation/hardhat-toolbox");
+require("dotenv").config();
 
-// Load environment variables
-config();
-
-export default {
+module.exports = {
   solidity: {
     version: "0.8.20",
     settings: {
       optimizer: {
         enabled: true,
-        runs: 200,
-      },
-    },
-  },
-  networks: {
-    blockdag_testnet: {
-      url: process.env.BLOCKDAG_RPC_URL || "https://rpc-stage.devdomian123.com",
-      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
-      chainId: 24171,  // Updated to correct BlockDAG testnet Chain ID
-      gasPrice: 20000000000,
-      gas: 6000000,
-    },
-    localhost: {
-      url: "http://127.0.0.1:8545"
-    },
-    hardhat: {
-      // Default Hardhat network
+        runs: 200
+      }
     }
   },
-  paths: {
-    sources: "./contracts",
-    tests: "./test",
-    cache: "./cache",
-    artifacts: "./artifacts"
+  networks: {
+    // Local development
+    hardhat: {},
+    
+    // BlockDAG Testnet
+    blockdag_testnet: {
+      url: "https://primordial.bdagscan.com", 
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      chainId: 1043, // Replace with actual BlockDAG testnet chain ID
+      gas: 2100000,
+      gasPrice: 8000000000
+    },
+    
+    // BlockDAG Mainnet (for production)
+    blockdag_mainnet: {
+      url: "https://mainnet-rpc.blockdag.network",
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      chainId: 1234, // Replace with actual BlockDAG mainnet chain ID
+      gas: 2100000,
+      gasPrice: 8000000000
+    }
+  },
+  etherscan: {
+    // Add BlockDAG explorer API key when available
+    apiKey: {
+      blockdag_testnet: "YOUR_BLOCKDAG_EXPLORER_API_KEY"
+    }
   }
 };

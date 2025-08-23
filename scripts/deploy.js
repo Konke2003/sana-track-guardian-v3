@@ -1,8 +1,13 @@
-import pkg from 'hardhat';
+// scripts/deploy.js
+import pkg from "ethers";
 const { ethers } = pkg;
 
 async function main() {
-    console.log("🚀 Starting SanaTrack deployment to BlockDAG testnet...\n");
+    console.log("🚀 Starting SanaTrack deployment to Ethereum Sepolia testnet...\n");
+
+    // Get network info
+    const network = await ethers.provider.getNetwork();
+    console.log("Network:", network.name, "Chain ID:", network.chainId.toString());
 
     // Get the deployer account
     const [deployer] = await ethers.getSigners();
@@ -10,36 +15,36 @@ async function main() {
 
     // Check deployer balance
     const balance = await ethers.provider.getBalance(deployer.address);
-    console.log("Account balance:", ethers.formatEther(balance), "ETH\n");
+    console.log("Account balance:", ethers.formatEther(balance), "ETH");
+    
+    // Check if we have enough ETH for deployment
+    const minimumBalance = ethers.parseEther("0.01"); // 0.01 ETH minimum
+    if (balance < minimumBalance) {
+        console.log("\n❌ Insufficient balance for deployment!");
+        console.log("💡 Get free testnet ETH from: https://sepoliafaucet.com");
+        console.log("💡 Or try: https://faucet.sepolia.dev");
+        return;
+    }
 
+    console.log("\n📋 Deploying SanaTrack contract...");
+    
     // Deploy the SanaTrack contract
-    console.log("📋 Deploying SanaTrack contract...");
     const SanaTrack = await ethers.getContractFactory("SanaTrack");
     const sanaTrack = await SanaTrack.deploy();
     
+    console.log("⏳ Waiting for deployment...");
     await sanaTrack.waitForDeployment();
     const contractAddress = await sanaTrack.getAddress();
 
-    console.log("✅ SanaTrack deployed successfully!");
+    console.log("\n✅ SanaTrack deployed successfully!");
     console.log("📍 Contract Address:", contractAddress);
-    console.log("🔗 BlockDAG Testnet Explorer:", `https://explorer.blockdag.network/address/${contractAddress}`);
+    console.log("🔗 Sepolia Etherscan:", `https://sepolia.etherscan.io/address/${contractAddress}`);
+    
     console.log("\n" + "=".repeat(60));
     console.log("🎉 DEPLOYMENT COMPLETED SUCCESSFULLY!");
     console.log("=".repeat(60));
     
-    // Save deployment info
-    const deploymentInfo = {
-        contractAddress: contractAddress,
-        network: "blockdag_testnet",
-        deployer: deployer.address,
-        deployedAt: new Date().toISOString(),
-        explorerUrl: `https://explorer.blockdag.network/address/${contractAddress}`
-    };
-    
-    console.log("\n📝 Deployment Summary:");
-    console.log(JSON.stringify(deploymentInfo, null, 2));
-    
-    return deploymentInfo;
+    return contractAddress;
 }
 
 // Handle deployment
