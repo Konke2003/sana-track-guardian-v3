@@ -68,30 +68,8 @@ export const useWallet = () => {
     });
   };
 
-  // Check if wallet is already connected (but don't auto-connect)
+  // Listen for account changes only (no auto-connect)
   useEffect(() => {
-    const checkConnection = async () => {
-      if (window.ethereum) {
-        try {
-          // Only check existing permissions, don't request new ones
-          const accounts = await window.ethereum.request({
-            method: 'eth_accounts',
-          });
-          
-          // Only auto-connect if user previously gave permission
-          if (accounts.length > 0) {
-            setState(prev => ({ ...prev, account: accounts[0] }));
-          }
-        } catch (error) {
-          console.error('Error checking wallet connection:', error);
-          // Don't auto-connect on error
-        }
-      }
-    };
-
-    checkConnection();
-
-    // Listen for account changes
     if (window.ethereum) {
       const handleAccountsChanged = (accounts: string[]) => {
         if (accounts.length > 0) {
