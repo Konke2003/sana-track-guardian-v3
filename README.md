@@ -1,4 +1,4 @@
-# SanaGuard - Blockchain Child Safety Tracking Platform
+# SanaTrack - Blockchain Child Safety Tracking Platform
 
 ## Project Overview
 
@@ -75,8 +75,8 @@ For production deployment, set these environment variables:
 VITE_MAPBOX_TOKEN=pk.eyJ1IjoieW91ci11c2VybmFtZSIsImEiOiJjbGF...
 
 # BlockDAG Network Configuration
-VITE_BLOCKCHAIN_RPC_URL=https://blockdag-rpc-url.com
-VITE_CHAIN_ID=your_chain_id
+VITE_BLOCKCHAIN_RPC_URL=https://rpc.primordial.bdagscan.com/  
+VITE_CHAIN_ID=1043 
 ```
 
 **Note about Mapbox Token**: The Mapbox public token is safe to include in frontend code and environment variables. Users will NOT need to enter their token every time - it's automatically loaded from environment variables in production.
@@ -91,11 +91,32 @@ VITE_CHAIN_ID=your_chain_id
 
 ### Smart Contract Structure
 ```solidity
-// Core contracts for BlockDAG deployment
-- ChildRegistry.sol: Register and manage child profiles
-- LocationTracker.sol: Store encrypted location data
-- EmergencyAlert.sol: Handle emergency notifications
-- ParentAccess.sol: Manage parent permissions and access control
+/**
+ * @title SanaTrack - Unified Child Safety Smart Contract
+ * @dev This contract integrates four core modules into a single BlockDAG-ready deployment:
+ *
+ * 1. Child Registry:
+ *    - Register and manage child profiles (name, age, parent address).
+ *
+ * 2. Location Tracker:
+ *    - Store encrypted location data on-chain.
+ *    - Enable parents to update child locations securely.
+ *
+ * 3. Emergency Alerts:
+ *    - Allow parents to trigger emergency alerts linked to a child.
+ *    - Broadcasts critical notifications on-chain for fast response.
+ *
+ * 4. Parent Access Control:
+ *    - Restricts updates and alerts to the child’s registered parent.
+ *    - Provides security via `onlyParent` modifier.
+ *
+ * This unified design simplifies deployment and ensures all core child safety features
+ * are accessible from a single smart contract address.
+ *
+ * Hackathon Notes:
+ * - Optimized for BlockDAG testnet/EVM deployment.
+ * - Consolidated for easier demo, ABI management, and frontend integration.
+ *
 ```
 
 ### Blockchain Integration
@@ -107,7 +128,7 @@ VITE_CHAIN_ID=your_chain_id
 ## 📦 Deployment Options
 
 ### Option 1: Lovable Platform (Quickest)
-1. Open [Lovable Project](https://lovable.dev/projects/86c341ec-8bf5-4e0b-8aaf-f4d8c9b75a30)
+1. Open [Lovable Project](https://sana-track-guardian-v3.lovable.app/)
 2. Click Share → Publish
 3. Your app is live instantly with automatic HTTPS
 
@@ -209,7 +230,5 @@ Built for BlockDAG Hackathon 2024. Open source under MIT License.
 
 ---
 
-**Team**: Team Sana
-**Demo**: [Link to live demo]
-**Video**: [Link to demo video]
-**Contracts**: [BlockDAG contract addresses]
+**Team**: BlockGuardian
+**Contracts**: 0x9Cd12087B42921e4f63Ea819E4c28Fd0Bc91bE94
