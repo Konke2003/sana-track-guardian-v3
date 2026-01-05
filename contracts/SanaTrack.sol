@@ -1,4 +1,7 @@
 // SPDX-License-Identifier: MIT
+// © 2026 Konke Cele. All Rights Reserved.
+// Project: SanaTrack Decentralized Child Safety
+// Role: Project Manager & Lead Developer
 pragma solidity ^0.8.20;
 
 contract SanaTrack {
